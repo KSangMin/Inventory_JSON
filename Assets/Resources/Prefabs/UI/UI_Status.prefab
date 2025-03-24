@@ -115,6 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972f229c13f801745916fa6aea949f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackText: {fileID: 1148388008083883982}
+  defenseText: {fileID: 1840258707008879773}
+  hpText: {fileID: 2403798453128949531}
+  critRateText: {fileID: 1070249654193029486}
+  closeButton: {fileID: 4783830642168544581}
 --- !u!1 &788720287072850551
 GameObject:
   m_ObjectHideFlags: 0

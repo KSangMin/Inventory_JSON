@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.49019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -841,8 +841,8 @@ RectTransform:
   m_Children:
   - {fileID: 4552886300982891398}
   - {fileID: 2088380672723109463}
-  - {fileID: 338644725837499544}
   - {fileID: 2371348841302753283}
+  - {fileID: 338644725837499544}
   m_Father: {fileID: 3573955785947581331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1003,6 +1003,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d9ae1815d04f14abb569c8e29b778d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quantityText: {fileID: 6371985468561285921}
+  inventoryTransform: {fileID: 2667365878189521616}
+  slots: []
+  closeButton: {fileID: 3261435973167541597}
 --- !u!1001 &213471965031379068
 PrefabInstance:
   m_ObjectHideFlags: 0
