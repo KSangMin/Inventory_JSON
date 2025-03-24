@@ -17,5 +17,14 @@ public class UI_Info : UI
     [SerializeField] private TextMeshProUGUI infoText;
 
     [SerializeField] Button statusButton;
-    [SerializeField] Button InventoryButton;
+    [SerializeField] Button inventoryButton;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        statusButton.onClick.AddListener(() => UIManager.Instance.ShowUI<UI_Status>());
+        inventoryButton.onClick.AddListener(() => UIManager.Instance.ShowUI<UI_Inventory>());
+
+    }
 }

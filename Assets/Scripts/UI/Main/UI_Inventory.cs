@@ -11,4 +11,13 @@ public class UI_Inventory : UI
     [SerializeField] private List<UI_ItemSlot> slots = new List<UI_ItemSlot>();
 
     [SerializeField] private Button closeButton;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        Hide();
+
+        closeButton.onClick.AddListener(Hide);
+    }
 }

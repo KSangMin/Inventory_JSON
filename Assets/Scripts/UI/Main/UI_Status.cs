@@ -10,4 +10,13 @@ public class UI_Status : UI
     [SerializeField] private TextMeshProUGUI critRateText;
 
     [SerializeField] private Button closeButton;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        Hide();
+
+        closeButton.onClick.AddListener(Hide);
+    }
 }

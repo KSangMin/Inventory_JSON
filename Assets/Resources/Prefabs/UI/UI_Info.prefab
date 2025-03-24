@@ -537,7 +537,7 @@ MonoBehaviour:
   expText: {fileID: 235858137289614240}
   infoText: {fileID: 6877633007996614193}
   statusButton: {fileID: 1625226523583006967}
-  InventoryButton: {fileID: 7390023112505583545}
+  inventoryButton: {fileID: 7390023112505583545}
 --- !u!1 &5665801059110584156
 GameObject:
   m_ObjectHideFlags: 0
