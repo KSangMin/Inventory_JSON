@@ -34,8 +34,6 @@ public class UIManager : Singleton<UIManager>
         }
 
         throw new InvalidOperationException($"There's No {uiType.Name} in UIManager");
-        
-        return null;
     }
 
     public T ShowPopupUI<T>() where T : UI_Popup
