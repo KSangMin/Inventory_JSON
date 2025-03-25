@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class SaveManager : Singleton<SaveManager>
@@ -11,6 +12,7 @@ public class SaveManager : Singleton<SaveManager>
     {
         data.Init();
 
+        CheckCharactersFileFirst();
         characterSaveDict = LoadCharacters().MakeDict();
     }
 
@@ -62,5 +64,18 @@ public class SaveManager : Singleton<SaveManager>
     public void SaveAll()
     {
         SaveDict<CharacterSaveDataLoader, int, CharacterSaveData>(characterSaveDict, nameof(CharacterSaveData));
+    }
+
+    void CheckCharactersFileFirst()
+    {
+        string fromPath = $"Data/{nameof(CharacterSaveData)}";
+        string toPath = $"{Application.persistentDataPath}/{nameof(CharacterSaveData)}.json";
+        if (!System.IO.File.Exists(toPath))
+        {
+            Debug.LogWarning($"캐릭터 파일을 찾을 수 없습니다. 새로 복사합니다: {toPath}");
+            TextAsset json = Resources.Load<TextAsset>(fromPath);
+            File.WriteAllText(toPath, json.text);
+            Debug.Log($"파일 이동 완료: {toPath}");
+        }
     }
 }
