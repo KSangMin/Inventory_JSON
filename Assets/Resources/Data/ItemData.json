@@ -1,0 +1,14 @@
+{
+    "data": [
+        {
+            "id": 0,
+            "name": "나무 도끼",
+            "spriteName": "Axe",
+            "description": "천 번 찍어 안 넘어가는 나무 없다.",
+            "attack": 50,
+            "defense": 50,
+            "hp": 50,
+            "critRate": 50
+        }
+    ]
+}
