@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -25,8 +24,10 @@ public class Player : MonoBehaviour
         OnCharacterChanged += UIManager.Instance.GetUI<UI_Inventory>().SetCharacterData;
 
         UIManager.Instance.GetUI<UI_Info>().OnSetNextCharacter -= SetNextCharacter;
+        UIManager.Instance.GetUI<UI_Inventory>().OnRandomButtonClicked -= GetRandomItem;
 
         UIManager.Instance.GetUI<UI_Info>().OnSetNextCharacter += SetNextCharacter;
+        UIManager.Instance.GetUI<UI_Inventory>().OnRandomButtonClicked += GetRandomItem;
 
         LoadCharacter();
     }
@@ -57,12 +58,15 @@ public class Player : MonoBehaviour
     {
         _data.inventory.Add(itemId);
         _data.equipped.Add(false);
+
+        UIManager.Instance.GetUI<UI_Inventory>().AddSlotandItem(SaveManager.Instance.data.ItemDict[itemId]);
     }
 
     public void RemoveItem(int inventoryIndex)
     {
-        _data.equipped[inventoryIndex] = false;
+        _data.equipped.RemoveAt(inventoryIndex);
         _data.inventory.RemoveAt(inventoryIndex);
+        UIManager.Instance.GetUI<UI_Inventory>().RemoveSlot(inventoryIndex);
     }
 
     public void EquipItem(int inventoryIndex)
@@ -74,4 +78,10 @@ public class Player : MonoBehaviour
     {
         _data.equipped[inventoryIndex] = false;
     }
+
+    public void GetRandomItem()
+    {
+        int index = UnityEngine.Random.Range(0, SaveManager.Instance.data.ItemDict.Count);
+        AddItem(index);
+    } 
 }

@@ -17,4 +17,14 @@ public class UI_ItemSlot : MonoBehaviour
         icon.sprite = curItem.icon;
         equippedMark.SetActive(isEquipped);
     }
+
+    public void Equipped()
+    {
+        equippedMark.SetActive(true);
+    }
+
+    public void UnEquipped()
+    {
+        equippedMark.SetActive(false);
+    }
 }
