@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,8 +19,8 @@ public class UI_Info : UI
 
     [SerializeField] Button statusButton;
     [SerializeField] Button inventoryButton;
-
-    private CharacterSaveData _curCharacter;
+    [SerializeField] Button nextCharacterButton;
+    public Action OnSetNextCharacter;
 
     protected override void Awake()
     {  
@@ -27,15 +28,22 @@ public class UI_Info : UI
 
         statusButton.onClick.AddListener(() => UIManager.Instance.ShowUI<UI_Status>());
         inventoryButton.onClick.AddListener(() => UIManager.Instance.ShowUI<UI_Inventory>());
+        nextCharacterButton.onClick.AddListener(NextCharacterButtonClicked);
     }
 
     public void SetCharacterData(CharacterSaveData data)
     {
         goldText.text = data.gold.ToString();
+        characterImage.sprite = SaveManager.Instance.data.characterDict[data.characterDataIndex].icon;
         characterName.text = data.name;
         characterLevel.text = data.level.ToString();
         expImage.fillAmount = (float)data.exp / data.maxExp;
         expText.text = $"{data.exp.ToString()} / {data.maxExp.ToString()}";
         infoText.text = data.GetInfo();
+    }
+
+    void NextCharacterButtonClicked()
+    {
+        OnSetNextCharacter?.Invoke();
     }
 }

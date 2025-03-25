@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private CharacterSaveData _data;
-    public int selectedCharacterIndex = 0;
+    [SerializeField] private int _selectedCharacterIndex = 0;
 
     public Action<CharacterSaveData> OnCharacterChanged;
 
@@ -24,21 +24,33 @@ public class Player : MonoBehaviour
         OnCharacterChanged += UIManager.Instance.GetUI<UI_Status>().SetCharacterData;
         OnCharacterChanged += UIManager.Instance.GetUI<UI_Inventory>().SetCharacterData;
 
-        LoadCharacter();
+        UIManager.Instance.GetUI<UI_Info>().OnSetNextCharacter -= SetNextCharacter;
 
-        OnCharacterChanged?.Invoke(_data);
+        UIManager.Instance.GetUI<UI_Info>().OnSetNextCharacter += SetNextCharacter;
+
+        LoadCharacter();
     }
 
     [ContextMenu("Load")]
     public void LoadCharacter()
     {
-        _data = SaveManager.Instance.characterSaveDict[selectedCharacterIndex];
+        _data = SaveManager.Instance.characterSaveDict[_selectedCharacterIndex];
+
+        OnCharacterChanged?.Invoke(_data);
     }
 
     [ContextMenu("Save")]
     public void SaveCharacter()
     {
         SaveManager.Instance.SaveAll();
+    }
+
+    void SetNextCharacter()
+    {
+        int count = SaveManager.Instance.characterSaveDict.Count;
+        _selectedCharacterIndex++;
+        _selectedCharacterIndex %= count;
+        LoadCharacter();
     }
 
     public void AddItem(int itemId)

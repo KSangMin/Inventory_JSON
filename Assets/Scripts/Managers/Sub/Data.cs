@@ -1,6 +1,8 @@
 //캐릭터, 아이템 등의 초기값 로드 용도
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+using static UnityEditor.Progress;
 
 public interface ILoader<Key, Value>
 {
@@ -8,6 +10,29 @@ public interface ILoader<Key, Value>
 }
 
 #region CharacterData
+
+[Serializable]
+public class Character
+{
+    public int id;
+    public Sprite icon;
+    public string description;
+    public int attack;
+    public int defense;
+    public int hp;
+    public int critRate;
+
+    public Character(CharacterData character)
+    {
+        id = character.id;
+        icon = Resources.Load<Sprite>($"Faces/Face_{character.id}");
+        description = character.description;
+        attack = character.attack;
+        defense = character.defense;
+        hp = character.hp;
+        critRate = character.critRate;
+    }
+}
 
 [Serializable]
 public class CharacterData
@@ -39,6 +64,43 @@ public class CharacterDataLoader : ILoader<int, CharacterData>
 #endregion
 
 #region ItemData
+
+[Serializable]
+public class Item
+{
+    public int id;
+    public string displayName;
+    public Sprite icon;
+    public string description;
+    public int attack;
+    public int defense;
+    public int hp;
+    public int critRate;
+
+    public Item(ItemData item)
+    {
+        id = item.id;
+        displayName = item.name;
+        icon = Resources.Load<Sprite>($"Items/{item.spriteName}");
+        description = item.description;
+        attack = item.attack;
+        defense = item.defense;
+        hp = item.hp;
+        critRate = item.critRate;
+    }
+
+    public Item(Item item)
+    {//인벤토리의 아이템이 서로 다른 스탯, 내구도 등을 가지고 있어야 할 때 사용
+        id = item.id;
+        displayName = item.displayName;
+        icon = item.icon;
+        description = item.description;
+        attack = item.attack;
+        defense = item.defense;
+        hp = item.hp;
+        critRate = item.critRate;
+    }
+}
 
 [Serializable]
 public class ItemData
