@@ -18,6 +18,16 @@ public class CharacterSaveData
     public int characterDataIndex;
     public List<int> inventory;
     public List<bool> equipped;
+
+    public CharacterSaveData()
+    {
+        id = 0;
+        name = "Chad";
+        gold = 20000;
+        characterDataIndex = 0;
+        inventory = new List<int>();
+        equipped = new List<bool>();
+    }
 }
 
 [Serializable]
@@ -32,5 +42,10 @@ public class CharacterSaveDataLoader : ISaveLoader<int, CharacterSaveData>
         }
 
         return dict;
+    }
+
+    public CharacterSaveDataLoader()
+    {
+        data.Add(new CharacterSaveData());
     }
 }
