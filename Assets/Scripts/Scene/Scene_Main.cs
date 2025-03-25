@@ -6,6 +6,8 @@ public class Scene_Main : Scene
     {
         base.Init();
 
+        SaveManager.Instance.Init();
+
         UIManager.Instance.ShowUI<UI_Info>();
         UIManager.Instance.ShowUI<UI_Status>();
         UIManager.Instance.ShowUI<UI_Inventory>();

@@ -11,6 +11,7 @@ public class UI_Inventory : UI
     [SerializeField] private List<UI_ItemSlot> slots = new List<UI_ItemSlot>();
 
     [SerializeField] private Button closeButton;
+    [SerializeField] private Button randomItemButton;
 
     protected override void Awake()
     {

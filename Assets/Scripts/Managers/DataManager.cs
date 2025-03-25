@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class DataManager
 {
-    public Dictionary<int, ItemData> ItemDict {  get; private set; } = new Dictionary<int, ItemData>();
+    public Dictionary<int, Item> ItemDict { get; private set; } = new Dictionary<int, Item>();
     public Dictionary<int, CharacterData> characterDict {  get; private set; } = new Dictionary<int, CharacterData>();
 
     public void Init()
     {
-        ItemDict = LoadJson<ItemDataLoader, int, ItemData>(nameof(ItemData)).MakeDict();
+        LoadItem();
+
         characterDict = LoadJson<CharacterDataLoader, int, CharacterData>(nameof(CharacterData)).MakeDict();
     }
 
@@ -16,5 +17,15 @@ public class DataManager
     {
         TextAsset textAsset = Resources.Load<TextAsset>($"Data/{path}");
         return JsonUtility.FromJson<Loader>(textAsset.text);
+    }
+
+    void LoadItem()
+    {
+        Dictionary<int, ItemData> ItemDataDict = LoadJson<ItemDataLoader, int, ItemData>(nameof(ItemData)).MakeDict();
+
+        foreach (ItemData item in ItemDataDict.Values)
+        {
+            ItemDict[item.id] = new Item(item);
+        }
     }
 }

@@ -1,3 +1,4 @@
+//캐릭터, 아이템 등의 초기값 로드 용도
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,6 @@ public interface ILoader<Key, Value>
 public class CharacterData
 {
     public int id;
-    public string name;
     public string description;
     public int attack;
     public int defense;
