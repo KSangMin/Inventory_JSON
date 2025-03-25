@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: -1
-  Icon: {fileID: 962833974473293623}
+  icon: {fileID: 962833974473293623}
   selectedMark: {fileID: 6076014755687937692}
   equippedMark: {fileID: 5432339127898647152}
 --- !u!1 &5432339127898647152
@@ -246,7 +246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2539928357990946897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -322,7 +322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8353924058293174726
 RectTransform:
   m_ObjectHideFlags: 0

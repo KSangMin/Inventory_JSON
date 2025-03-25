@@ -11,7 +11,7 @@ public class SaveManager : Singleton<SaveManager>
     {
         data.Init();
 
-        characterSaveDict = LoadCharacters().MakeDict();     
+        characterSaveDict = LoadCharacters().MakeDict();
     }
 
     Loader LoadJson<Loader, Key, Value>(string fileName) where Loader : ISaveLoader<Key, Value>, new()

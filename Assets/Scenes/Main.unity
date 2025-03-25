@@ -594,6 +594,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccaa7aca8fdaaa442b6d8e1973599680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data:
+    id: 0
+    name: Chad
+    gold: 20000
+    characterDataIndex: 0
+    level: 0
+    exp: 0
+    maxExp: 0
+    inventory: 
+    equipped: 
+  selectedCharacterIndex: 0
 --- !u!4 &1205763838
 Transform:
   m_ObjectHideFlags: 0
@@ -603,7 +614,7 @@ Transform:
   m_GameObject: {fileID: 1205763836}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 958.7288, y: 340.03094, z: -17.689804}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -616,5 +627,5 @@ SceneRoots:
   - {fileID: 84647037}
   - {fileID: 720922971}
   - {fileID: 519420032}
-  - {fileID: 512926858}
   - {fileID: 1205763838}
+  - {fileID: 512926858}

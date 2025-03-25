@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    Dictionary<Type, UI> _sceneDict = new Dictionary<Type, UI>();
-    Stack<UI_Popup> _popupUIs = new Stack<UI_Popup>();
+    private Dictionary<Type, UI> _sceneDict = new Dictionary<Type, UI>();
+    private Stack<UI_Popup> _popupUIs = new Stack<UI_Popup>();
 
-    int popupOrder = 10;
+    private int _popupOrder = 10;
 
     Transform _root;
     Transform Root
@@ -40,7 +40,7 @@ public class UIManager : Singleton<UIManager>
         Type uiType = typeof(T);
 
         T ui = Util.InstantiatePrefabAndGetComponent<T>(path: $"UI/{uiType.Name}", parent: Root);
-        ui.SetCanvasOrder(popupOrder++);
+        ui.SetCanvasOrder(_popupOrder++);
         _popupUIs.Push(ui);
 
         return ui;
@@ -52,7 +52,7 @@ public class UIManager : Singleton<UIManager>
 
         UI_Popup popup = _popupUIs.Pop();
         Destroy(popup.gameObject);
-        popupOrder--;
+        _popupOrder--;
         return;
     }
 

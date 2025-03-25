@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    GameObject panel;
+    private GameObject _panel;
 
     protected virtual void Awake()
     {
-        panel = transform.GetChild(0).gameObject;
+        _panel = transform.GetChild(0).gameObject;
     }
 
     public virtual void Show()
     {
-        panel.SetActive(true);
+        _panel.SetActive(true);
     }
 
     public virtual void Hide()
     {
-        panel.SetActive(false);
+        _panel.SetActive(false);
     }
 
     public virtual void Close()

@@ -19,4 +19,12 @@ public class UI_Status : UI
 
         closeButton.onClick.AddListener(Hide);
     }
+
+    public void SetCharacterData(CharacterSaveData data)
+    {
+        attackText.text = data.GetAttack().ToString();
+        defenseText.text = data.GetDefense().ToString();
+        hpText.text = data.GetHP().ToString();
+        critRateText.text = data.GetCritRate().ToString();
+    }
 }
