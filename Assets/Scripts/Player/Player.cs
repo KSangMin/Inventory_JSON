@@ -18,14 +18,12 @@ public class Player : MonoBehaviour
         OnCharacterChanged -= UIManager.Instance.GetUI<UI_Info>().SetCharacterData;
         OnCharacterChanged -= UIManager.Instance.GetUI<UI_Status>().SetCharacterData;
         OnCharacterChanged -= UIManager.Instance.GetUI<UI_Inventory>().SetCharacterData;
+        UIManager.Instance.GetUI<UI_Info>().OnSetNextCharacter -= SetNextCharacter;
+        UIManager.Instance.GetUI<UI_Inventory>().OnRandomButtonClicked -= GetRandomItem;
 
         OnCharacterChanged += UIManager.Instance.GetUI<UI_Info>().SetCharacterData;
         OnCharacterChanged += UIManager.Instance.GetUI<UI_Status>().SetCharacterData;
         OnCharacterChanged += UIManager.Instance.GetUI<UI_Inventory>().SetCharacterData;
-
-        UIManager.Instance.GetUI<UI_Info>().OnSetNextCharacter -= SetNextCharacter;
-        UIManager.Instance.GetUI<UI_Inventory>().OnRandomButtonClicked -= GetRandomItem;
-
         UIManager.Instance.GetUI<UI_Info>().OnSetNextCharacter += SetNextCharacter;
         UIManager.Instance.GetUI<UI_Inventory>().OnRandomButtonClicked += GetRandomItem;
 
@@ -59,14 +57,14 @@ public class Player : MonoBehaviour
         _data.inventory.Add(itemId);
         _data.equipped.Add(false);
 
-        UIManager.Instance.GetUI<UI_Inventory>().AddSlotandItem(SaveManager.Instance.data.ItemDict[itemId]);
+        UIManager.Instance.GetUI<UI_Inventory>().AddItem(SaveManager.Instance.data.ItemDict[itemId]);
     }
 
     public void RemoveItem(int inventoryIndex)
     {
         _data.equipped.RemoveAt(inventoryIndex);
         _data.inventory.RemoveAt(inventoryIndex);
-        UIManager.Instance.GetUI<UI_Inventory>().RemoveSlot(inventoryIndex);
+        UIManager.Instance.GetUI<UI_Inventory>().RemoveItem(inventoryIndex);
     }
 
     public void EquipItem(int inventoryIndex)

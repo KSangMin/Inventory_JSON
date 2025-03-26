@@ -3,18 +3,25 @@ using UnityEngine.UI;
 
 public class UI_ItemSlot : MonoBehaviour
 {
-    public int index = -1;
-    //public ItemData itemData;
     [SerializeField] private Image icon;
     [SerializeField] private GameObject selectedMark;
     [SerializeField] private GameObject equippedMark;
     public Item curItem;
 
-    public void SetSlot(int index, Item item, bool isEquipped)
+    public void ClearSlot()
     {
-        this.index = index;
+        curItem = null;
+        icon.sprite = null;
+        icon.gameObject.SetActive(false);
+        selectedMark.SetActive(false);
+        equippedMark.SetActive(false);
+    }
+
+    public void SetSlot(Item item, bool isEquipped)
+    {
         curItem = item;
         icon.sprite = curItem.icon;
+        icon.gameObject.SetActive(true);
         equippedMark.SetActive(isEquipped);
     }
 
