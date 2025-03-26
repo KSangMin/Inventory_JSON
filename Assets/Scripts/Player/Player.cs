@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField] private int _selectedCharacterIndex = 0;
 
     public Action<CharacterSaveData> OnCharacterChanged;
+    public Action<CharacterSaveData> OnEquipChanged;
+    [SerializeField] private EventChannel<int> OnEquipChangedEvent;
 
     private void Awake()
     {
@@ -18,12 +20,16 @@ public class Player : MonoBehaviour
         OnCharacterChanged -= UIManager.Instance.GetUI<UI_Info>().SetCharacterData;
         OnCharacterChanged -= UIManager.Instance.GetUI<UI_Status>().SetCharacterData;
         OnCharacterChanged -= UIManager.Instance.GetUI<UI_Inventory>().SetCharacterData;
+        OnEquipChanged -= UIManager.Instance.GetUI<UI_Status>().SetCharacterData;
+        OnEquipChangedEvent.UnregisterListener(ToggleItem);
         UIManager.Instance.GetUI<UI_Info>().OnSetNextCharacter -= SetNextCharacter;
         UIManager.Instance.GetUI<UI_Inventory>().OnRandomButtonClicked -= GetRandomItem;
 
         OnCharacterChanged += UIManager.Instance.GetUI<UI_Info>().SetCharacterData;
         OnCharacterChanged += UIManager.Instance.GetUI<UI_Status>().SetCharacterData;
         OnCharacterChanged += UIManager.Instance.GetUI<UI_Inventory>().SetCharacterData;
+        OnEquipChanged += UIManager.Instance.GetUI<UI_Status>().SetCharacterData;
+        OnEquipChangedEvent.RegisterListener(ToggleItem);
         UIManager.Instance.GetUI<UI_Info>().OnSetNextCharacter += SetNextCharacter;
         UIManager.Instance.GetUI<UI_Inventory>().OnRandomButtonClicked += GetRandomItem;
 
@@ -67,14 +73,10 @@ public class Player : MonoBehaviour
         UIManager.Instance.GetUI<UI_Inventory>().RemoveItem(inventoryIndex);
     }
 
-    public void EquipItem(int inventoryIndex)
+    public void ToggleItem(int inventoryIndex)
     {
-        _data.equipped[inventoryIndex] = true;
-    }
-
-    public void UnequipItem(int inventoryIndex)
-    {
-        _data.equipped[inventoryIndex] = false;
+        _data.equipped[inventoryIndex] = !_data.equipped[inventoryIndex];
+        OnEquipChanged?.Invoke(_data);
     }
 
     public void GetRandomItem()

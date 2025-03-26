@@ -25,26 +25,23 @@ public class UI_Inventory : UI
         closeButton.onClick.AddListener(Hide);
         randomItemButton.onClick.AddListener(() => OnRandomButtonClicked?.Invoke());
 
-        ClearInventory();
+        ClearInventorySlot();
     }
 
     public void SetCharacterData(CharacterSaveData data)
     {
+        ClearInventoryItem();
+
         quantityText.text = $"<color=orange>{data.inventory.Count}</color> / <color=grey>{data.maxInventoryQuantity}</color>";
 
-        SetInventory(data);
-    }
-
-    void SetInventory(CharacterSaveData data)
-    {
-        for(int i = 0; i < data.inventory.Count; i++)
+        for (int i = 0; i < data.inventory.Count; i++)
         {
             Item item = SaveManager.Instance.data.ItemDict[data.inventory[i]];
-            slots[i].SetSlot(item, data.equipped[i]);
+            slots[i].SetSlot(i, item, data.equipped[i]);
         }
     }
 
-    void ClearInventory()
+    void ClearInventorySlot()
     {
         foreach(Transform child in inventoryTransform)
         {
@@ -60,13 +57,21 @@ public class UI_Inventory : UI
         }
     }
 
+    void ClearInventoryItem()
+    {
+        for (int i = 0; i < slotCount; i++)
+        {
+            slots[i].ClearSlot();
+        }
+    }
+
     public void AddItem(Item item)
     {
         for(int i = 0; i < slotCount; i++)
         {
             if (slots[i].curItem == null)
             {
-                slots[i].SetSlot(item, false);
+                slots[i].SetSlot(i, item, false);
                 return;
             }
         }

@@ -602,9 +602,11 @@ MonoBehaviour:
     level: 0
     exp: 0
     maxExp: 0
+    maxInventoryQuantity: 120
     inventory: 
     equipped: 
-  selectedCharacterIndex: 0
+  _selectedCharacterIndex: 0
+  OnEquipChangedEvent: {fileID: 11400000, guid: 57c69a0b978007f419229f455aeb13d5, type: 2}
 --- !u!4 &1205763838
 Transform:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class UI_Info : UI
 
     [SerializeField] private TextMeshProUGUI infoText;
 
+    [SerializeField] Button saveButton;
     [SerializeField] Button statusButton;
     [SerializeField] Button inventoryButton;
     [SerializeField] Button nextCharacterButton;
@@ -26,9 +27,10 @@ public class UI_Info : UI
     {  
         base.Awake();
 
+        saveButton.onClick.AddListener(() => SaveManager.Instance.SaveAll());
         statusButton.onClick.AddListener(() => UIManager.Instance.ShowUI<UI_Status>());
         inventoryButton.onClick.AddListener(() => UIManager.Instance.ShowUI<UI_Inventory>());
-        nextCharacterButton.onClick.AddListener(NextCharacterButtonClicked);
+        nextCharacterButton.onClick.AddListener(() => OnSetNextCharacter?.Invoke());
     }
 
     public void SetCharacterData(CharacterSaveData data)
@@ -40,10 +42,5 @@ public class UI_Info : UI
         expImage.fillAmount = (float)data.exp / data.maxExp;
         expText.text = $"{data.exp.ToString()} / {data.maxExp.ToString()}";
         infoText.text = data.GetInfo();
-    }
-
-    void NextCharacterButtonClicked()
-    {
-        OnSetNextCharacter?.Invoke();
     }
 }
